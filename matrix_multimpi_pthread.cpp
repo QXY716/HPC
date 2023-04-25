@@ -127,18 +127,12 @@ int main(int argc, char *argv[])
                 b[i * size + j] = element + 2;
             }
         } // Create Matrix a and b
-
-        pthread_create(&scatter, nullptr, scatter_thread, (void *)&args);
-        pthread_create(&bcast, nullptr, bcast_thread, (void *)&args);
-        pthread_create(&gather, nullptr, gather_thread, (void *)&args);
-    }
-    else
-    {
-        pthread_create(&scatter, nullptr, scatter_thread, (void *)&args);
-        pthread_create(&bcast, nullptr, bcast_thread, (void *)&args);
-        pthread_create(&gather, nullptr, gather_thread, (void *)&args);
     }
     
+    pthread_create(&scatter, nullptr, scatter_thread, (void *)&args);
+    pthread_create(&bcast, nullptr, bcast_thread, (void *)&args);
+    pthread_create(&gather, nullptr, gather_thread, (void *)&args);
+
     // Wait for threads to finish
     pthread_join(scatter, nullptr);
     pthread_join(bcast, nullptr);
